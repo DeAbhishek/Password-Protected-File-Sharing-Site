@@ -22,11 +22,9 @@ exports.getFile = async (req, res) => {
   if (file.password != null) {
     if (req.body.password == null) {
       res.render("password");
-      console.log("hi");
       return;
     }
     const match = await bcrypt.compare(req.body.password, file.password);
-    console.log(match);
     if (!match) {
       res.render("password", { error: true });
       return;
