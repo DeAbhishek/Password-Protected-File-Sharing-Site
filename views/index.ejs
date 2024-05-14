@@ -6,8 +6,14 @@
     <title>Document</title>
   </head>
   <body>
+    <% if (locals.fileLink != null) { %>
+    <div style="margin-bottom: 1rem">
+      Your file is upload
+      <a href="<%= locals.fileLink %>"><%= locals.fileLink %></a>
+    </div>
+    <% } %>
     <form
-      action="/upload"
+      action="/file/upload"
       method="post"
       style="
         display: grid;
@@ -22,7 +28,7 @@
       <input type="file" id="file" name="file" required />
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" />
-      <button style="grid-column: span 2;" type="submit">Share</button>
+      <button style="grid-column: span 2" type="submit">Share</button>
     </form>
   </body>
 </html>

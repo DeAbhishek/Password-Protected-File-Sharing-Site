@@ -1,6 +1,7 @@
 require("dotenv").config();
 const multer = require("multer");
 const mongoose = require("mongoose");
+const fileRoute = require("./routes/file");
 const express = require("express");
 const app = express();
 
@@ -18,9 +19,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.post("/upload", upload.single("file"), (req, res) => {
-  res.send("Hi");
-});
+app.use("/file", upload.single("file"), fileRoute);
 
 app.listen(process.env.PORT, () => {
   console.log("This app listening on port 3000!");
