@@ -19,11 +19,19 @@ exports.uploadFile = async (req, res) => {
 exports.getFile = async (req, res) => {
   const file = await File.findById(req.params.id);
 
-  file.password != null
-    ? req.body.password == null
-      ? res.render("password")
-      : null
-    : null;
+  if (file.password != null) {
+    if (req.body.password == null) {
+      res.render("password");
+      console.log("hi");
+      return;
+    }
+    const match = await bcrypt.compare(req.body.password, file.password);
+    console.log(match);
+    if (!match) {
+      res.render("password", { error: true });
+      return;
+    }
+  }
 
   file.downloadCount++;
   file.save();
