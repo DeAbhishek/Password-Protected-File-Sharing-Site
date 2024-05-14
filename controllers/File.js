@@ -18,6 +18,13 @@ exports.uploadFile = async (req, res) => {
 
 exports.getFile = async (req, res) => {
   const file = await File.findById(req.params.id);
+
+  file.password != null
+    ? req.body.password == null
+      ? res.render("password")
+      : null
+    : null;
+
   file.downloadCount++;
   file.save();
   res.download(file.path, file.originalFilename);

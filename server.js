@@ -5,6 +5,8 @@ const fileRoute = require("./routes/file");
 const express = require("express");
 const app = express();
 
+app.use(express.json());
+
 app.set("view engine", "ejs");
 
 main().catch((err) => console.log(err));
